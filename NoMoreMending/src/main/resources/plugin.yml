@@ -1,0 +1,7 @@
+name: NoMoreMending
+version: '${project.version}'
+main: com.gmail.mads456dk.nomoremending.NoMoreMendingPlugin
+api-version: 1.17
+prefix: NoMoreMending
+authors: [ Darchie ]
+description: A plugin to disable mending drops from fishing
