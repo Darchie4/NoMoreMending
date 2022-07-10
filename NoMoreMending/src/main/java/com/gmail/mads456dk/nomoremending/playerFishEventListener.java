@@ -1,5 +1,8 @@
 package com.gmail.mads456dk.nomoremending;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
@@ -7,6 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.logging.Level;
 
 public class playerFishEventListener implements Listener {
     private final NoMoreMendingPlugin plugin;
@@ -21,11 +27,16 @@ public class playerFishEventListener implements Listener {
         if (caughtItem == null) {
             return;
         }
-
         ItemStack caughtItemStack = caughtItem.getItemStack();
+        plugin.getLogger().log(Level.INFO, "Du fanget noget");
+
         if (!caughtItemStack.containsEnchantment(Enchantment.MENDING)) {
             return;
         }
+
+        plugin.getLogger().log(Level.WARNING, "Du har fanget noget med mending");
+        plugin.getLogger().log(Level.INFO, caughtItemStack.getType().toString());
+        plugin.getLogger().log(Level.INFO, caughtItemStack.getItemMeta().getEnchants().keySet().toString());
 
         ConfigManager configManager = plugin.getConfigManager();
         if (caughtItemStack.getType().equals(Material.BOOK)) {
@@ -39,5 +50,6 @@ public class playerFishEventListener implements Listener {
             return;
         }
         caughtItemStack.addEnchantment(configManager.getConvertToEnchantment(), 1);
+
     }
 }
